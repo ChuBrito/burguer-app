@@ -1,0 +1,49 @@
+.BuildControl{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+    margin: 5px 0;  
+    background-color: beige;
+    border-radius: 12px;
+}
+
+.BuildControl .ButtonWraper{
+    display: flex;
+    
+}
+.BuildControl button{
+    font: inherit;
+    padding: 5px;
+    margin: 0 5px;
+    width: 30px;
+    height: 30px;
+    border: 1px solid #AA6817;
+    cursor: pointer;
+    outline: none;
+    color: beige;
+    border-radius: 20px;
+}
+.BuildControl .More{
+    background-color: coral;
+}
+.BuildControl .Less{
+    background-color: darkgoldenrod;
+}
+.BuildControl .More:hover, .BuildControl .More:active{
+    color: coral;
+    background-color: beige;
+}
+.BuildControl .Less:hover, .BuildControl .Less:active{
+    color: darkgoldenrod;
+    background-color: beige;
+}
+.BuildControl .Label{
+    font-weight: bold;
+    color: chocolate;
+    text-align: center;
+    flex: auto;
+    width: 100%;
+
+}
+

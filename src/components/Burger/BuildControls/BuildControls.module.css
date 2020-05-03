@@ -1,0 +1,79 @@
+.BuildControlsPanel{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 80%;
+    margin: auto;
+    padding: 10px;
+    background-color: darksalmon;
+    border-radius: 12px;
+}
+
+.ButtonWrapper{
+    display: flex;
+    justify-content: space-around;   
+    width: 50%;
+}
+
+.OrderButton {
+    background-color: #DAD735;
+    outline: none;
+    cursor: pointer;
+    border: 1px solid ;
+    color: #966909;
+    font-family: inherit;
+    font-size: 1.2em;
+    box-shadow: 2px 2px 2px brown;
+
+}
+
+.OrderButton:hover, .OrderButton:active {
+    background-color: #A0DB41;
+    border: 1px solid #966909;
+    color: #966909;
+}
+
+.OrderButton:disabled {
+    background-color: #C7C6C6;
+    cursor: not-allowed;
+    border: 1px solid #ccc;
+    color: #888888;
+}
+
+.OrderButton:not(:disabled) {
+    animation: enable 0.3s linear;
+}
+
+@keyframes enable {
+    0% {
+        transform: scale(1);
+    }
+    60% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.ClearBtn{
+    background-color: orangered;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    border: 1px solid orange;
+    color: black;
+    font-size: 1.2em;
+    box-shadow: 2px 2px 2px brown;
+    align-self: center;
+}
+
+.ClearBtn:not(:disabled) {
+    animation: enable 0.3s linear;
+}
+.ClearBtn:disabled {
+    background-color: #C7C6C6;
+    cursor: not-allowed;
+    border: 1px solid #ccc;
+    color: #888888;
+}
