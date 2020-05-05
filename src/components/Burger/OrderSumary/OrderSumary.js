@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Aux from '../../Utilities/Aux'
+import Aux from '../../Utilities/Auxiliar'
 import classes from './OderSumary.module.css'
 import StylizedButton from './../../UI/StylizedButton/StylizedButton'
 
