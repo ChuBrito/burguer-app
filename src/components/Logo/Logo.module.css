@@ -1,8 +1,11 @@
 .Logo {
-    background-color: white;
+    background-color: transparent;
     padding: 8px;
-    height: 120%;
     box-sizing: border-box;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    margin-left: -25px;
 }
 
 .Logo img{

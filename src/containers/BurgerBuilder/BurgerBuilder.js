@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import Aux from '../../components/Utilities/Auxiliar'
+import Aux from '../Utilities/Auxiliar'
 import Burger from '../../components/Burger/Burger'
-import BuildControls from './../../components/Burger/BuildControls/BuildControls'
+import BuildControls from '../../components/Burger/BuildControls/BuildControls'
 import Modal from '../../components/UI/Modal/Modal'
 import OrderSumary from '../../components/Burger/OrderSumary/OrderSumary'
 
@@ -99,7 +99,7 @@ class BurguerBuilder extends Component {
     render() {
         return (
             <Aux>
-                <Modal showModal={this.state.purchasing} hideOrderHandler={this.hideOrderHandler}>
+                <Modal showModal={this.state.purchasing} hideHandler={this.hideOrderHandler}>
                     <OrderSumary 
                         ingredients={this.state.ingredients}
                         totalPrice={this.state.totalPrice}
