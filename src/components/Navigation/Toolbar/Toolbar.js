@@ -12,9 +12,9 @@ const toolbar = props => (
         <nav className={classes.DesktopOnly}> 
             <NavigationItems/>
         </nav>   
-        <buttom onClick={props.openDrawer} className={classes.MobileOnly}>
+        <button onClick={props.openDrawer} className={classes.MobileOnly}>
             <MdMenu className={classes.IconMenu}/>
-        </buttom>
+        </button>
     </header>
 )
 

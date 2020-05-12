@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Aux from '../../../containers/Utilities/Auxiliar'
+import Aux from '../../../Containers/Utilities/Auxiliar'
 import classes from './OderSumary.module.css'
 import StylizedButton from './../../UI/StylizedButton/StylizedButton'
 
@@ -9,9 +9,9 @@ const orderSumary = (props) => {
         .map( ingredientKey => {
             return (
                 <li key= {ingredientKey}>
-                    <spam style={{textTransform: 'capitalize'}}>
+                    <span style={{textTransform: 'capitalize'}}>
                         {ingredientKey}
-                    </spam>
+                    </span>
                     : {props.ingredients[ingredientKey]}
                 </li>
             );

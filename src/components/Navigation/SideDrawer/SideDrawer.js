@@ -2,7 +2,7 @@ import React from 'react'
 import Logo from '../../Logo/Logo'
 import NavigationItens from '../NavigationItens/NavigationItems'
 import Backdrop from '../../UI/Backdrop/Backdrop'
-import Aux from '../../../containers/Utilities/Auxiliar'
+import Aux from '../../../Containers/Utilities/Auxiliar'
 import classes from './SideDrawer.module.css'
 
 const sideDrawer = props => {
