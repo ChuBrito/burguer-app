@@ -1,0 +1,15 @@
+.CheckoutSumary{
+    width: 80%;
+    text-align: center;
+    margin: auto
+}
+
+.ButtonWrapper{
+    margin: auto;
+}
+
+@media( min-width: 600px){
+    .CheckoutSumary{
+        width: 500px;
+    }
+}

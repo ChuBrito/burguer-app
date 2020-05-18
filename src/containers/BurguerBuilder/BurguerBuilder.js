@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import Aux from '../Utilities/Auxiliar'
 import Burger from '../../components/Burger/Burger'
 import BuildControls from '../../components/Burger/BuildControls/BuildControls'
@@ -87,31 +87,18 @@ class BurguerBuilder extends Component {
     }
 
     completePurchaseHandler = () => {
-        this.setState({loading: true})
-        const order = {
-            ingredients: this.state.ingredients,
-            price: this.state.totalPrice,
-            customer: {
-                id: 5545,
-                name: "Felipe",
-                adress: {
-                    street:"Av. Taco la vida", 
-                    number:170
-                },
-                email:"test@mail.com"
-            },
-            delivery:"fastest"
-        }
+        const queryParams = [];
 
-        axios.post('/orders.json', order)
-            .then( response => {
-                this.setState({loading:false, purchasing: false})
-                console.log(response)
-            })
-            .catch(error => {
-                console.log(error)
-                this.setState({loading:false, purchasing: false})
-            });
+        for (let i in this.state.ingredients) {
+            queryParams.push(encodeURI(i) + '=' + encodeURIComponent(this.state.ingredients[i]))
+        }
+        queryParams.push('price=' + this.state.totalPrice)
+        const queryString =queryParams.join('&');
+        this.props.history.push({
+            pathname:'/checkout',
+            search: '?' + queryString
+        })
+        console.log(queryString);
     }
 
     clearOrderHandler = () => {
