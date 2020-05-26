@@ -5,6 +5,7 @@ const stylizedButton = props => (
     <button 
         className={[classes.Button, classes[props.btnType]].join(' ')}
         onClick={props.onClick}
+        disabled={props.disabled}
         >
         {props.children}
     </button>

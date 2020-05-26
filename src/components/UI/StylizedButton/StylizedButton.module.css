@@ -20,3 +20,9 @@
     border: 1px solid orange;
 
 }
+
+.Disabled{
+    cursor: not-allowed;
+    color: grey;
+    border: 1px solid grey;
+}
