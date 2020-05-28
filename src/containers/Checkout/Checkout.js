@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
+import { Route } from 'react-router'
+import { connect } from 'react-redux'
+
 import CheckoutSumary from '../../components/Order/CheckoutSumary/CheckoutSumary'
 import ContactData from '../../containers/Checkout/ContactData/ContactData'
-import { Route } from 'react-router'
 
 export class Checkout extends Component {
     state = {
@@ -10,18 +12,7 @@ export class Checkout extends Component {
     }
 
     UNSAFE_componentWillMount() {
-        const query = new URLSearchParams(this.props.location.search);
-        const paramsIngredients = {}
-        let paramsPrice = 0
-        for (let param of query.entries()){
-            if(param[0] === 'price'){
-                paramsPrice = param[1];
-            }else{
-                paramsIngredients[param[0]] = +param[1];
-            }
-        }
-        this.setState({ingredients:paramsIngredients, price: paramsPrice});
-        console.log(this.props.history)
+        this.setState({ingredients: this.props.ings, price: this.props.totalPrice});
     }
     cancelHandler = () => {
         this.props.history.goBack()
@@ -35,22 +26,24 @@ export class Checkout extends Component {
         return (
             <div>
                 <CheckoutSumary 
-                    ingredients={this.state.ingredients} 
+                    ingredients={this.props.ings} 
                     confirmClick={this.confirmOrderHandler} 
                     cancelClick={this.cancelHandler}
                 />
                 <Route 
                     path={this.props.match.path + '/contact-data'} 
-                    render={() => (
-                        <ContactData 
-                            ingredients={this.state.ingredients} 
-                            totalprice={this.state.price}
-                        />
-                    )}
+                    component={ContactData}
                 />
             </div>
         )
     }
 }
 
-export default Checkout
+const mapStateToProps = state => {
+    return {
+        ings: state.ingredients,
+        totalPrice: state.totalPrice
+    }
+}
+
+export default connect(mapStateToProps)(Checkout)

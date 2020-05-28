@@ -18,6 +18,7 @@ const BuildControls = (props) => (
                 <BuildControlElemt 
                     key={ctrl.label}
                     label={ctrl.label}
+                    ingredientHandler={props.ingredientHandler(ctrl.type)}
                     moreHandler={() => props.moreHandler(ctrl.type)}
                     lessHandler={() => props.lessHandler(ctrl.type)}
                 />

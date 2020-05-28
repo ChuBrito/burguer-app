@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
+
 import classes from './ContactData.module.css'
 
+import axios from '../../../services/axios-orders'
 import StylizedButton from '../../../components/UI/StylizedButton/StylizedButton'
 import StylizedInputField from '../../../components/UI/StylizedInputField/StylizedInputField'
-
 import Spinner from '../../../components/UI/Spinner/Spinner'
-import axios from '../../../services/axios-orders'
-import { withRouter } from 'react-router-dom'
  
 class ContactData extends Component {
     state = {
@@ -147,7 +148,7 @@ class ContactData extends Component {
             contactData[el] = this.state.orderForm[el].value
         }
         const order = {
-            ingredients: this.props.ingredients,
+            ingredients: this.props.ings,
             price: this.props.totalPrice,
             orderData: contactData
         }
@@ -210,4 +211,12 @@ class ContactData extends Component {
     }
 }
 
-export default withRouter(ContactData)
+const mapStateToProps = state => {
+    return {
+        ings: state.ingredients,
+        totalPrice: state.totalPrice
+    }
+}
+
+
+export default connect(mapStateToProps)(withRouter(ContactData))

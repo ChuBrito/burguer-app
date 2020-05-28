@@ -9,12 +9,11 @@ const buildControlElemt = (props) => {
                 <button className={classes.More} onClick={ props.moreHandler}> 
                     <FiPlusCircle/>
                 </button>
-                <button className={classes.Less} onClick={ props.lessHandler}> 
+                <button className={classes.Less} onClick={ props.lessHandler} disabled={!props.ingredientHandler}> 
                     <FiMinusCircle/>
                 </button>
             </div>
         </div>
     )
 }
-
 export default buildControlElemt

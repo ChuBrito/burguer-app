@@ -26,7 +26,7 @@ const burguerReducer = (state = initialState, action) =>{
                     ...state.ingredients,
                     [action.ingredientName]: state.ingredients[action.ingredientName] + 1,
                 },
-                totalPrice: state.totalPrice + action.ingredientPrice
+                totalPrice: state.totalPrice + INGREDIENT_PRICE[action.ingredientName]
             };
         case 'REMOVE_INGREDIENT':
             return{
@@ -45,7 +45,7 @@ const burguerReducer = (state = initialState, action) =>{
                     meat: 0,
                     cheese: 0,
                 },
-                price: 2
+                totalPrice: 2
             };
         default:
             return state;

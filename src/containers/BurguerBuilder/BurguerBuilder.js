@@ -14,8 +14,6 @@ import * as actionTypes from '../../store/actions/actions'
 
 class BurguerBuilder extends Component {
     state = {
-
-        totalPrice: 2,
         purchasable: false,
         purchasing: false,
         loading: false
@@ -38,7 +36,13 @@ class BurguerBuilder extends Component {
             .reduce((sum, el) => {
                 return sum + el;
             }, 0);
-        this.setState({purchasable: sum >= 1})
+        return sum >= 1
+    }
+
+    verifyIngredientHandler = (ing) => {
+        if(this.props.ings[ing] || this.props.ings[ing] > 0)
+            return true;
+        return false;
     }
 
     showOrderHandler = () => {
@@ -50,18 +54,8 @@ class BurguerBuilder extends Component {
     }
 
     completePurchaseHandler = () => {
-        const queryParams = [];
 
-        for (let i in this.state.ingredients) {
-            queryParams.push(encodeURI(i) + '=' + encodeURIComponent(this.state.ingredients[i]))
-        }
-        queryParams.push('price=' + this.state.totalPrice)
-        const queryString =queryParams.join('&');
-        this.props.history.push({
-            pathname:'/checkout',
-            search: '?' + queryString
-        })
-        console.log(queryString);
+        this.props.history.push('/checkout')
     }
 
     render() {
@@ -71,7 +65,7 @@ class BurguerBuilder extends Component {
         if( !this.state.loading && this.props.ings){
             orderSumary = <OrderSumary 
                 ingredients={this.props.ings}
-                totalPrice={this.state.totalPrice}
+                totalPrice={this.props.totalPrice}
                 hideOrder={this.hideOrderHandler}
                 completePurchase={this.completePurchaseHandler}
             />
@@ -81,10 +75,11 @@ class BurguerBuilder extends Component {
             burger = <Aux>
                 <Burger ingredients={this.props.ings} />
                 <BuildControls 
-                    totalPrice={this.state.totalPrice}
+                    totalPrice={this.props.totalPrice}
                     moreHandler={this.props.onIngredientAdd}
                     lessHandler={this.props.onIngredientRemove}
-                    purchasable={this.state.purchasable}
+                    purchasable={this.verifyPurchasebleHandler(this.props.ings)}
+                    ingredientHandler={(ing) => this.verifyIngredientHandler(ing)}
                     callOrder={this.showOrderHandler}
                     clearOrder={this.props.onIgredientsClear}
                 />
@@ -104,7 +99,8 @@ class BurguerBuilder extends Component {
 
 const mapStateToProps = state => {
     return {
-        ings: state.ingredients
+        ings: state.ingredients,
+        totalPrice: state.totalPrice
     }
 }
 
