@@ -98,7 +98,7 @@ class ContactData extends Component {
             },
         },
         loading: false,
-        formIsValid: true
+        formIsValid: false
     }
 
     onChangeHandler = (event, id) => {
@@ -112,12 +112,13 @@ class ContactData extends Component {
         updatedFormElement.touched = true;
         updatedFormElement.valid = this.validateField(updatedFormElement.value, updatedFormElement.validation);
         updatedForm[id] = updatedFormElement;
-        let fomrIsValid = true;
+        let formIsValid = true;
         for(let validationKey in updatedForm){
-            fomrIsValid = updatedForm[validationKey].valid && fomrIsValid
+            formIsValid = updatedForm[validationKey].valid && formIsValid && updatedForm[validationKey].touched
         }
+        console.log(formIsValid)
         this.setState(
-            {orderForm: updatedForm, fomrIsValid: fomrIsValid}
+            {orderForm: updatedForm, formIsValid: formIsValid}
         )
 
     }
@@ -193,7 +194,7 @@ class ContactData extends Component {
                         />
                     ))
                 }
-                <StylizedButton btnType="Success" disabled={this.state.formIsValid} >Confirmar</StylizedButton>
+                <StylizedButton disabled={!this.state.formIsValid} btnType="Success">Confirmar</StylizedButton>
             </form>
         )
         
