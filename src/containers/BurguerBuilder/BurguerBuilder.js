@@ -10,7 +10,7 @@ import Spinner from '../../components/UI/Spinner/Spinner'
 
 import axios from '../../services/axios-orders'
 import withErrorHandler from '../Utilities/withErrorHandler'
-import * as actionTypes from '../../store/actions/actions'
+import * as builderActions from '../../store/actions/index'
 
 class BurguerBuilder extends Component {
     state = {
@@ -19,12 +19,25 @@ class BurguerBuilder extends Component {
         loading: false
     }
     componentDidMount(){
-        // axios.get('https://burguer-app-676c8.firebaseio.com/ingredients.json').then(
-        //     response =>{
-        //         this.setState({ingredients: response.data})
-        //     }    
+        axios.get('https://burguer-app-676c8.firebaseio.com/ingredients.json')
+        .then(
+            response => {
+                this.props.updateIngredients(response.data)
+            } 
+        )
+        .catch( error => {
+                this.props.errorHandler(error)
+        })
 
-        // )
+        axios.get('https://burguer-app-676c8.firebaseio.com/ingredients-prices.json')
+        .then(
+            response =>{
+                this.props.updatePrices(response.data);
+            } 
+        )
+        .catch( error => {
+            this.props.errorHandler(error)
+        })
     }
 
 
@@ -100,22 +113,24 @@ class BurguerBuilder extends Component {
 const mapStateToProps = state => {
     return {
         ings: state.ingredients,
-        totalPrice: state.totalPrice
+        totalPrice: state.totalPrice,
+        error: state.error
     }
 }
 
 
 const mapDispatchToProps = dispatch =>{
     return {
-        onIngredientAdd: (ingName ) => dispatch({
-            type: actionTypes.ADD_INGREDIENT, 
-            ingredientName: ingName
-        }),
-        onIngredientRemove: (ingName ) => dispatch({
-            type: actionTypes.REMOVE_INGREDIENT, 
-            ingredientName: ingName
-        }),
-        onIgredientsClear: () => dispatch({type: actionTypes.CLEAR_INGREDIENTS})
+        onIngredientAdd: (ingName ) => dispatch(
+            builderActions.addIngredient(ingName)
+        ),
+        onIngredientRemove: (ingName ) => dispatch(
+            builderActions.removeIngredient(ingName)
+        ),
+        onIgredientsClear: () => dispatch({type: builderActions.clearIngredients}),
+        updateIngredients: (ingredients) => dispatch(builderActions.updateIngredients(ingredients)),
+        updatePrices: (prices) => dispatch(builderActions.updatePrices(prices)),
+        errorHandler: (error) => dispatch(builderActions.errorHandler(error) )
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(BurguerBuilder, axios ));
