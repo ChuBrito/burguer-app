@@ -2,7 +2,7 @@ Project made from eighth module of React Udemy course.
 
 Technologies used so far:
 
-React, ECMA Script 7, Firebase
+React, ECMA Script 7, Firebase, Redux
 
 Libaries: 
 
